@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style>
+	@font-face{
+		    font-family :'Helvetica-Neue-Medium-Condensed';
+
+		    src : url('http://dukegraphinc.com/font/helvetica-neue-medium-condensed.eot');
+		    src : url('http://dukegraphinc.com/font/helvetica-neue-medium-condensed.eot?') format('eot'),
+		          url('http://dukegraphinc.com/font/helvetica-neue-medium-condensed.woff') format('woff'),
+		          url('http://dukegraphinc.com/font/helvetica-neue-medium-condensed.svg#abcd') format('svg'),
+		          url('http://dukegraphinc.com/font/helvetica-neue-medium-condensed.ttf') format('truetype');
+
+		    font-weight:normal;
+		    font-style:normal;
+		}
+		@font-face{
+		    font-family :'Helvetica-Neue-Bold-Condensed';
+
+		    src : url('http://dukegraphinc.com/font/helvetica-neue-bold-condensed.eot');
+		    src : url('http://dukegraphinc.com/font/helvetica-neue-bold-condensed.eot?') format('eot'),
+		          url('http://dukegraphinc.com/font/helvetica-neue-bold-condensed.woff') format('woff'),
+		          url('http://dukegraphinc.com/font/helvetica-neue-bold-condensed.svg#abcd') format('svg'),
+		          url('http://dukegraphinc.com/font/helvetica-neue-bold-condensed.ttf') format('truetype');
+
+		    font-weight:normal;
+		    font-style:normal;
+		}
+		body { 
+		  	background-color: #fff; 
+		  	padding: 0; 
+		  	margin: 0;
+		  	color:#1d1d1b;
+		  	overflow: hidden;
+		}
+		#canvas {
+			position:absolute;
+		}
+		#content {
+			width:100%;
+			height:100%;
+			position:absolute;
+		}
+		.content-right{
+			width:230px;
+			float:right;
+		}
+		.content-set{
+			position:relative;
+			width:192px;
+			height:100%;
+			display:block;
+			float:left;
+		}
+		#set-text{
+			position:absolute;
+			width:192px;
+			bottom:0px;	
+			display:block;
+			float:left;
+		}
+		.row {
+			font-family: 'Helvetica-Neue-Medium-Condensed';
+			font-size: 11.5px;
+			letter-spacing:0.5px;
+			text-align:right;
+			color:#5c5b5b;
+			display:block;
+			white-space:nowrap;
+			overflow: hidden;
+			-o-text-overflow: ellipsis;
+			-ms-text-overflow: ellipsis;
+			text-overflow: ellipsis;
+		}
+		.row p {
+			margin:0;
+			display:inline-block;
+			letter-spacing:1px;
+			color:#32859e;
+		}
+		.content-chat{
+			width:192px;
+			height:100%;
+			display:block;
+			float:left;
+		}
+		#get-text{
+			width:152px;
+			height:13px;
+			font-size:11.5px;
+			letter-spacing:1px;
+			font-family :'Helvetica-Neue-Medium-Condensed';
+			text-align: right;
+			border-style:none;
+			background-color:rgba(255, 255, 255, 0.5);
+			display:block;
+			float:right;
+		}
+		#get-name{
+			width:152px;
+			height:30px;
+			color:#1d1d1d;
+			font-size:28px;
+			margin:0 0 25px 0;
+			letter-spacing:-0.5px;
+			font-family :'Helvetica-Neue-Bold-Condensed';
+			text-align: right;
+			border-style:none;
+			background-color:rgba(255, 255, 255, 0.5);
+			display:block;
+			float:right;
+		}
+		.content-input { 
+			width:100%;
+			margin-top:7px;
+			display:block;
+		}
+		.line {
+			width:152px;
+			height:1px;
+			margin:10px 0 3px 0;
+			background-color:#d2d2d1;
+			display:block;
+			float:right;
+		}
+		.content-left {
+			width:78px;
+			float:left;
+		}
+		.life {
+			position:absolute;
+			bottom:25px;
+			left:38px;
+			width:40px;
+			height:30px;
+		   	font-family: 'Helvetica-Neue-Bold-Condensed';
+			font-size:28px;
+			letter-spacing:-0.5px;
+			color:#1d1d1d;
+			float:right;
+			display:block;
+			text-align:left;
+		}
+		.message{
+			width:450px;
+			margin:auto;
+			text-align:center;
+		}
+		.message p{
+			margin:10px;
+			font-family:'Helvetica-Neue-Bold-Condensed';
+			font-size:28px;
+			letter-spacing:-0.5px;
+			color:#1d1d1d;
+		}
+	</style>
+	<script type="text/javascript" src="socket.io/socket.io.js"></script>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<div id="content">
+		<div class="content-left"><span id="life" class="life"></span></div>
+		<div class="content-right">
+			<div id="set" class="content-set">
+				<div id="set-text"></div>
+			</div>
+			<div id="chat" class="content-chat">
+				<form id="form-chat" name="form-chat" onsubmit="return false;">
+					<span class="content-input">
+						<input id="get-text" name="get-text" type="text" size="50" placeholder="ENTER YOUR TEXT" />
+					</span>
+				</form>
+				<span class="line"></span>
+				<form id="form-name" name="form-name" onsubmit="return false;">
+					<span class="content-input">
+						<input id="get-name" name="get-name" type="text" size="50" />
+					</span>
+				</form>
+			</div>
+		</div>
+		<div id="message" class="message"></div>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="class/socket.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/myself.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/member.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/monster.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/keyboard.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/mouse.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/shoot.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/bullet.class.js"></script>
+	<script type="text/javascript" charset="utf-8" src="class/main.class.js"></script>
+	<script type="text/javascript">
+		
+		  var classMain = new classmain();
+	
+	</script>
+</body>

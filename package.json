@@ -1,0 +1,18 @@
+{
+	"author": "Jonathan Delefortrie",
+	"name": "LiveGame",
+	"description": "Real time multiplayer",
+	"version": "0.0.1",
+	"engines": {
+		"node": "*"
+	},
+	"dependencies": {
+		"express": "3.0.0rc4",
+		"socket.io": "0.9.10"
+	},
+	"devDependencies":{},
+	"subdomain": "game",
+	"scripts": {
+		"start": "app.js"
+	}
+}
