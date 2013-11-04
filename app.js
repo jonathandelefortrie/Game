@@ -22,12 +22,12 @@ io.sockets.on('connection', function (socket) {
   socket.on('client_connected', function (data) {
 	
 	if(i <= 5 && o == 0){
-    		dataArray[i] = data;
+    	dataArray[i] = data;
 		dataArray[i].w = true;
 		dataArray[i].i = socket.id;
-    		socket.player = dataArray[i];
+    	socket.player = dataArray[i];
 		socket.emit('get_ball', dataArray[i]);
-    		socket.emit('get_all_balls', dataArray);
+    	socket.emit('get_all_balls', dataArray);
 		socket.emit('get_all_messages', messageArray);
 		socket.broadcast.emit('get_new_ball', dataArray[i]);
 		i++;
@@ -114,12 +114,12 @@ io.sockets.on('connection', function (socket) {
   socket.on('disconnect', function () {
 
 	var j = 0;
-    	var tmpArray = new Array();
+    var tmpArray = new Array();
 
-    	for(n in dataArray) {
-        	if(dataArray[n].i != socket.id){
-	  	    	tmpArray[j] = dataArray[n];
-	  	    	j++;
+	for(n in dataArray) {
+    	if(dataArray[n].i != socket.id){
+  	    	tmpArray[j] = dataArray[n];
+  	    	j++;
   		}
 	}
 	i = j;
@@ -148,6 +148,11 @@ io.sockets.on('connection', function (socket) {
 		monsterArray.dy = Math.round( Math.random() * 720 );
 		
 	},3000);
+  });
+
+  socket.on('disconnect', function () {
+
+  	if(dataArray.length==0) clearInterval(set);
   });
 
 });

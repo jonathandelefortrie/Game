@@ -1,4 +1,6 @@
 function classsocket(){
+
+   var set;
    
    this.socket = function (url, options) {
 
@@ -29,8 +31,8 @@ function classsocket(){
       });
 
       return e.socket.on('disconnect', function() {
-                e.connected = false;
-                return e.displayError('You are disconnected !');
+        e.connected = false;
+        return e.displayError('You are disconnected !');
       });
     }
 
@@ -46,10 +48,11 @@ function classsocket(){
     }
     this.socket.prototype.displayError = function(mess) {
       	error.value  = '';
-	error.innerHTML = '<p>' + mess + '</p>';
-	error.style.visibility = 'visible';
-	setTimeout(function(){
-		error.style.visibility = 'hidden';
-	}, 3000);
+      	error.innerHTML = '<p>' + mess + '</p>';
+      	error.style.visibility = 'visible';
+        clearTimeout(set);
+      	set = setTimeout(function(){
+      		error.style.visibility = 'hidden';
+      	}, 3000);
     }
 }

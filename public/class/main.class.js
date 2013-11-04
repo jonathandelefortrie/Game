@@ -39,7 +39,7 @@ function classmain() {
 			window.addEventListener('keypress', keypress, false);
 			window.addEventListener('resize', resize, false);
 			context = canvas.getContext('2d');
-			socket = new classSocket.socket();	
+			socket = new classSocket.socket();
 
 			ly = new classMyself.myself({
 				p: { x: width/2, y: height/2 },
@@ -190,7 +190,7 @@ function classmain() {
 	resize = function(){
 
 		set = window.document.getElementById( 'set' );
-    		chat = window.document.getElementById( 'chat' );
+    	chat = window.document.getElementById( 'chat' );
 		error = window.document.getElementById( 'message' );
 
 		width = window.innerWidth;

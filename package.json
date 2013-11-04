@@ -2,7 +2,7 @@
 	"author": "Jonathan Delefortrie",
 	"name": "LiveGame",
 	"description": "Real time multiplayer",
-	"version": "0.0.1",
+	"version": "0.0.1-9",
 	"engines": {
 		"node": "*"
 	},
@@ -10,9 +10,8 @@
 		"express": "3.0.0rc4",
 		"socket.io": "0.9.10"
 	},
-	"devDependencies":{},
-	"subdomain": "game",
 	"scripts": {
 		"start": "app.js"
-	}
+	},
+	"subdomain": "jonathandelefortrie-game-project"
 }
