@@ -152,7 +152,10 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', function () {
 
-  	if(dataArray.length==0) clearInterval(set);
+  	if(dataArray.length==0) {
+  		messageArray = [];
+  		clearInterval(set);
+  	}
   });
 
 });
